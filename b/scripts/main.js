@@ -10,11 +10,12 @@ world.events.beforeItemUse.subscribe(ev => {
             for(let i = 0; i < data.magicData[magicType].summonData.length; i++){
                 pl.runCommandAsync(`execute as @s at @s ${data.magicData[magicType].resetRotateX?"rotated ~ 0 ":""} run summon sta_magic:magic_bullet ${data.magicData[magicType].summonEntityName} ${data.magicData[magicType].summonData[i][0]} ${data.magicData[magicType].summonData[i][1]} ${data.magicData[magicType].summonData[i][2]}`);
                 pl.runCommandAsync(`execute at @s as @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] rotated ~${data.magicData[magicType].summonData[i][3]} ~${data.magicData[magicType].summonData[i][4]} run tp @s ~~~~~`);
+                pl.runCommandAsync(`scoreboard players operation @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] PlayerID = @s PlayerID`);
                 pl.runCommandAsync(`tag @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] add setUp`);
             }
         } catch (e) {
             pl.kill();
-            world.say(`error:${pl} used unexpected magic.`);
+            world.say(`error: ${pl.nameTag} used unexpected magic.`);
         }
     }
 })
@@ -29,11 +30,12 @@ system.runSchedule(function tickEvent(){
         }else if(player.getComponent("inventory").container.getItem(player.selectedSlot)?.typeId === "sta_magic:magic_wand" && sneakTemp >= 21){
             magicSetFornFunc(player);
         }
+        player.runCommandAsync("title @a actionbar 現在選択中の魔法スロット:スロット"+(player.getComponent("inventory").container.getItem(player.selectedSlot).data+1)+"、魔法名:"+data.magicData[world.scoreboard.getObjective("magicType" + player.getComponent("inventory").container.getItem(player.selectedSlot).data).getScore(player.scoreboard)]?.name)
     }
 });
 
 function unzipMagicDataScore(getFrom){
-    let s = world.scoreboard.getObjective("gotMagicData").getScore(getFrom);
+    let s = world.scoreboard.getObjective("gotMagicData").getScore(getFrom.scoreboard);
     let r = [50];
     for(let i = 0; i < 25; i++){
         r[i] = s % 2;
@@ -57,8 +59,8 @@ function magicSetFornFunc(player) {
         .button("5番目の魔法設定");
     magicSetForm.show(player).then(res => {
         if(!res.canceled){
-            let magicSet = new ActionFormData().title(`${res.selection}番目の魔法設定`);
-            const magicDataUnziped = unzipMagicDataScore(player);
+            let magicSet = new ActionFormData().title(`${res.selection+1}番目の魔法設定`);
+            let magicDataUnziped = unzipMagicDataScore(player);
             for(let i = 0; i < 50; i++){
                 if(magicDataUnziped[i] == 1){
                     magicSet = magicSet.button(data.magicData[i].name);
@@ -66,7 +68,7 @@ function magicSetFornFunc(player) {
             }
             magicSet.show(player).then(resp => {
                 if(!resp.canceled){
-                    player.runCommandAsync(`scoreboard players add @s magicType${player.getComponent("inventory").container.getItem(player.selectedSlot).data} ${resp.selection}`);
+                    player.runCommandAsync(`scoreboard players set @s magicType${player.getComponent("inventory").container.getItem(player.selectedSlot).data} ${resp.selection}`);
                 } else {
                     magicSetFormFunc();
                 }
@@ -80,7 +82,8 @@ function sneakEndTime(player) {
         player.sneakingTime++
         return 0;
     } else {
-        return player.sneakingTime;
+        const temp = player.sneakingTime;
         player.sneakingTime = 0;
+        return temp;
     }
 }
