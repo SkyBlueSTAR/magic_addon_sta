@@ -1,0 +1,36 @@
+{
+    "format_version": 2,
+    "header": {
+      "name": "Magic addon v1.0.0-beta",
+      "description": "magic addon made by @SkyBlueSTAR_139",
+      "version": [1, 0, 0],
+      "uuid": "48315d79-a766-475d-b958-17c8011672cc",
+      "min_engine_version": [1, 19, 50]
+    },
+    "modules": [
+      {
+        "type": "data",
+        "description": " ",
+        "version": [1, 0, 0],
+        "uuid": "d5947f2b-e3ba-47d9-bc96-78b59905849c"
+      },
+      {
+        "type": "script",
+        "description": " ",
+        "version": [1, 0, 0],
+        "uuid": "df2b7b56-cd87-441c-a550-aa3f99151bc4",
+        "language": "javascript",
+        "entry": "scripts/main.js"
+      }
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.1.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.0.0-beta"
+        }
+    ]
+  }

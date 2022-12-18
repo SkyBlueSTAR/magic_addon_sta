@@ -1,0 +1,18 @@
+{
+    "format_version": 2,
+    "header": {
+      "name": "Magic addon v1.0.0-beta",
+      "description": "magic addon made by @SkyBlueSTAR_139",
+      "version": [1, 0, 0],
+      "uuid": "07affebd-7deb-4590-9f77-4c8809d618aa",
+      "min_engine_version": [1, 19, 50]
+    },
+    "modules": [
+      {
+        "type": "resources",
+        "description": " ",
+        "version": [1, 0, 0],
+        "uuid": "6656127b-e774-4113-922a-0c43641a4c47"
+      }
+    ]
+  }

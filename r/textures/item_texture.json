@@ -1,0 +1,9 @@
+{
+    "resource_pack_name": "sta_magic",
+    "texture_name": "atlas.items",
+    "texture_data": {
+      "wand": {
+        "textures": "textures/sta_magic/wand"
+      }
+    }
+  }

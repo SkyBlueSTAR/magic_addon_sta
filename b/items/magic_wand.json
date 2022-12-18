@@ -1,0 +1,14 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+      "description": {
+        "identifier": "sta_magic:magic_wand"
+      },
+  
+      "components": {
+        "minecraft:icon": {
+          "texture": "wand"
+        }
+      }
+    }
+  }
