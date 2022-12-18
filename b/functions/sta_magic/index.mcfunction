@@ -28,6 +28,8 @@ tag @e[type=sta_magic:magic_bullet,name=fire_1] add move
 scoreboard players add @e[type=sta_magic:magic_bullet] magic_time 1
 
 #魔法弾関連-移動
+execute as @e[type=sta_magic:magic_bullet,tag=move,rxm=-90,rx=-1] at @s run tp @s ~~~~~-10
+execute as @e[type=sta_magic:magic_bullet,tag=move,rxm=1,rx=90] at @s run tp @s ~~~~~10
 execute as @e[type=sta_magic:magic_bullet,tag=move] at @s run tp @s ^^^1
 
 #魔法弾関連-パーティクル
