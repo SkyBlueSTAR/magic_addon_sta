@@ -13,8 +13,7 @@
                 "height": 1.0
             },
             "minecraft:physics": {},
-            "minecraft:nameable": {},
-            "minecraft:conditional_bandwidth_optimization": {}
+            "minecraft:nameable": {}
         }
     }
 }
