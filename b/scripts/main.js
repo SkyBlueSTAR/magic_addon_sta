@@ -2,22 +2,12 @@ import {world,system} from "@minecraft/server";
 import {ActionFormData} from "@minecraft/server-ui";
 import data from "./data.js";
 
-world.events.beforeItemUse.subscribe(ev => {
-    if(ev.item.typeId === "sta_magic:magic_wand"){
-        let pl = ev.source;
-        let magicType = world.scoreboard.getObjective("magicType" + pl.getComponent("inventory").container.getItem(pl.selectedSlot).data).getScore(pl.scoreboard);
-        try {
-            for(let i = 0; i < data.magicData[magicType].summonData.length; i++){
-                pl.runCommandAsync(`execute as @s at @s ${data.magicData[magicType].resetRotateX?"rotated ~ 0 ":""} run summon sta_magic:magic_bullet ${data.magicData[magicType].summonEntityName} ${data.magicData[magicType].summonData[i][0]} ${data.magicData[magicType].summonData[i][1]} ${data.magicData[magicType].summonData[i][2]}`);
-                pl.runCommandAsync(`execute at @s as @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] rotated ~${data.magicData[magicType].summonData[i][3]} ~${data.magicData[magicType].summonData[i][4]} run tp @s ~~~~~`);
-                pl.runCommandAsync(`scoreboard players operation @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] PlayerID = @s PlayerID`);
-                pl.runCommandAsync(`tag @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] add setUp`);
-            }
-        } catch (e) {
-            pl.kill();
-            world.say(`error: ${pl.nameTag} used unexpected magic.`);
-        }
-    }
+world.events.itemStartCharge.subscribe(ev=>{
+    ev.source.using = true;
+})
+
+world.events.itemStopCharge.subscribe(ev=>{
+    ev.source.using = false;
 })
 
 system.runSchedule(function tickEvent(){
@@ -30,7 +20,13 @@ system.runSchedule(function tickEvent(){
         }else if(player.getComponent("inventory").container.getItem(player.selectedSlot)?.typeId === "sta_magic:magic_wand" && sneakTemp >= 21){
             magicSetFornFunc(player);
         }
-        player.runCommandAsync("title @a actionbar 現在選択中の魔法スロット:スロット"+(player.getComponent("inventory").container.getItem(player.selectedSlot).data+1)+"、魔法名:"+data.magicData[world.scoreboard.getObjective("magicType" + player.getComponent("inventory").container.getItem(player.selectedSlot).data).getScore(player.scoreboard)]?.name)
+        if(player.getComponent("inventory").container.getItem(player.selectedSlot)?.typeId === "sta_magic:magic_wand"){
+            player.runCommandAsync("title @a actionbar 現在選択中の魔法スロット:スロット"+(player.getComponent("inventory").container.getItem(player.selectedSlot).data+1)+"、魔法名:"+data.magicData[world.scoreboard.getObjective("magicType" + player.getComponent("inventory").container.getItem(player.selectedSlot).data).getScore(player.scoreboard)]?.name)
+        }
+        
+        if(player.using && player.getComponent("inventory").container.getItem(player.selectedSlot)?.typeId === "sta_magic:magic_wand" && player.getItemCooldown("sta_magic_cooldown")==0){
+            magicUse(player);
+        }
     }
 });
 
@@ -47,6 +43,23 @@ function unzipMagicDataScore(getFrom){
         }
     }
     return r;
+}
+
+function magicUse(ev){
+    let pl = ev;
+    let magicType = world.scoreboard.getObjective("magicType" + pl.getComponent("inventory").container.getItem(pl.selectedSlot).data).getScore(pl.scoreboard);
+    try {
+        for(let i = 0; i < data.magicData[magicType].summonData.length; i++){
+            pl.runCommandAsync(`execute as @s at @s ${data.magicData[magicType].resetRotateX?"rotated ~ 0 ":""} run summon sta_magic:magic_bullet ${data.magicData[magicType].summonEntityName} ${data.magicData[magicType].summonData[i][0]} ${data.magicData[magicType].summonData[i][1]} ${data.magicData[magicType].summonData[i][2]}`);
+            pl.runCommandAsync(`execute at @s as @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] rotated ~${data.magicData[magicType].summonData[i][3]} ~${data.magicData[magicType].summonData[i][4]} run tp @s ~~~~~`);
+            pl.runCommandAsync(`scoreboard players operation @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] PlayerID = @s PlayerID`);
+            pl.runCommandAsync(`tag @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] add setUp`);
+            pl.startItemCooldown("sta_magic_cooldown",data.magicData[magicType].cooldown)
+        }
+    } catch (e) {
+        pl.kill();
+        world.say(`error: ${pl.nameTag} used unexpected magic.`);
+    }
 }
 
 function magicSetFornFunc(player) {

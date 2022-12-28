@@ -1,14 +1,20 @@
 {
-    "format_version": "1.16.100",
-    "minecraft:item": {
-      "description": {
-        "identifier": "sta_magic:magic_wand"
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "sta_magic:magic_wand"
+    },
+
+    "components": {
+      "minecraft:icon": {
+        "texture": "wand"
       },
-  
-      "components": {
-        "minecraft:icon": {
-          "texture": "wand"
-        }
+      "minecraft:cooldown":{
+        "category": "sta_magic_cooldown",
+        "duration": 0
+      },
+      "minecraft:chargeable":{
       }
     }
   }
+}

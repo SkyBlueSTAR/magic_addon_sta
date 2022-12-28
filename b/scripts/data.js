@@ -4,8 +4,9 @@
         <importで使った名前>.magicData[number:magicType].<取り出したいデータ>
         name:string
         summonEntityName:string
-        summonData:number[][5]
+        summonData:number[][5] //[[x,y,z,ry,rx](,[x,y,z,ry,rx],...)]
         resetRotateX:boolean
+        cooldown:number //tick指定
 */
 
 export default
@@ -15,301 +16,351 @@ export default
             name:"ファイアボール",
             summonEntityName:"fire_1",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:20
         },
         {
             name:"フレイムシュート",
             summonEntityName:"fire_2",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"バーニングショット",
             summonEntityName:"fire_3",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"グランドバースト",
             summonEntityName:"fire_4",
             summonData:[[0,0,0,-10,0],[0,0,0,0,0],[0,0,0,10,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"プロミネンス",
             summonEntityName:"fire_5",
             summonData:[[0,0,10,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"アイスショット",
             summonEntityName:"ice_1",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"アイシクルスタチュー",
             summonEntityName:"ice_2",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"ヘイルストーム",
             summonEntityName:"ice_3",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"フローズンアヴァランチ",
             summonEntityName:"ice_4",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"アブソリュートゼロ",
             summonEntityName:"ice_5",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"ウインドカッター",
             summonEntityName:"wind_1",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ゲイルフィールド",
             summonEntityName:"wind_2",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"エリアストーム",
             summonEntityName:"wind_3",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"タービュランス",
             summonEntityName:"wind_4",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"セレスティアルテンペスト",
             summonEntityName:"wind_5",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"サンダーボルト",
             summonEntityName:"thunder_1",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ライトニングスパーク",
             summonEntityName:"thunder_2",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"エレクトロレビン",
             summonEntityName:"thunder_3",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ダイナモトニトルス",
             summonEntityName:"thunder_4",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"プラズマオーバードライブ",
             summonEntityName:"thunder_5",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"パワーゲイン",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"シールドエンハンス",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"スピードリインフォース",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"インスタントヒール",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"リジェネレーション",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ファイアボール(償)",
             summonEntityName:"fire_6",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"フレイムシュート(償)",
             summonEntityName:"fire_7",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"バーニングショット(償)",
             summonEntityName:"fire_8",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"グランドバースト(償)",
             summonEntityName:"fire_9",
             summonData:[[0,0,0,-10,0],[0,0,0,0,0],[0,0,0,10,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"プロミネンス(償)",
             summonEntityName:"fire_10",
             summonData:[[0,0,10,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"アイスショット(償)",
             summonEntityName:"ice_6",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"アイシクルスタチュー(償)",
             summonEntityName:"ice_7",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"ヘイルストーム(償)",
             summonEntityName:"ice_8",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"フローズンアヴァランチ(償)",
             summonEntityName:"ice_9",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"アブソリュートゼロ(償)",
             summonEntityName:"ice_10",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"ウインドカッター(償)",
             summonEntityName:"wind_6",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ゲイルフィールド(償)",
             summonEntityName:"wind_7",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"エリアストーム(償)",
             summonEntityName:"wind_8",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"タービュランス(償)",
             summonEntityName:"wind_9",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"セレスティアルテンペスト(償)",
             summonEntityName:"wind_10",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"サンダーボルト(償)",
             summonEntityName:"thunder_6",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ライトニングスパーク(償)",
             summonEntityName:"thunder_7",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"エレクトロレビン(償)",
             summonEntityName:"thunder_8",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"ダイナモトニトルス(償)",
             summonEntityName:"thunder_9",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"プラズマオーバードライブ(償)",
             summonEntityName:"thunder_10",
             summonData:[[0,0,0,0,0]],
-            resetRotateX:true
+            resetRotateX:true,
+            cooldown:0
         },
         {
             name:"パワーゲイン(償)",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"シールドエンハンス(償)",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"スピードリインフォース(償)",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"インスタントヒール(償)",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         },
         {
             name:"リジェネレーション(償)",
             summonEntityName:"",
             summonData:[],
-            resetRotateX:false
+            resetRotateX:false,
+            cooldown:0
         }
     ]
 }
