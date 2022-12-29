@@ -50,11 +50,11 @@ function magicUse(ev){
     let magicType = world.scoreboard.getObjective("magicType" + pl.getComponent("inventory").container.getItem(pl.selectedSlot).data).getScore(pl.scoreboard);
     try {
         for(let i = 0; i < data.magicData[magicType].summonData.length; i++){
-            pl.runCommandAsync(`execute as @s at @s ${data.magicData[magicType].resetRotateX?"rotated ~ 0 ":""} run summon sta_magic:magic_bullet ${data.magicData[magicType].summonEntityName} ${data.magicData[magicType].summonData[i][0]} ${data.magicData[magicType].summonData[i][1]} ${data.magicData[magicType].summonData[i][2]}`);
+            pl.runCommandAsync(`execute ${data.magicData[magicType].resetRotateX?"rotated ~ 0 ":""} run summon sta_magic:magic_bullet ${data.magicData[magicType].summonEntityName} ~${data.magicData[magicType].summonData[i][0]} ~${data.magicData[magicType].summonData[i][1]} ~${data.magicData[magicType].summonData[i][2]}`);
             pl.runCommandAsync(`execute at @s as @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] rotated ~${data.magicData[magicType].summonData[i][3]} ~${data.magicData[magicType].summonData[i][4]} run tp @s ~~~~~`);
             pl.runCommandAsync(`scoreboard players operation @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] PlayerID = @s PlayerID`);
             pl.runCommandAsync(`tag @e[type=sta_magic:magic_bullet,tag=!setUp,c=1] add setUp`);
-            pl.startItemCooldown("sta_magic_cooldown",data.magicData[magicType].cooldown)
+            pl.startItemCooldown("sta_magic_cooldown",data.magicData[magicType].cooldown);
         }
     } catch (e) {
         pl.kill();
@@ -81,7 +81,7 @@ function magicSetFornFunc(player) {
             }
             magicSet.show(player).then(resp => {
                 if(!resp.canceled){
-                    player.runCommandAsync(`scoreboard players set @s magicType${player.getComponent("inventory").container.getItem(player.selectedSlot).data} ${resp.selection}`);
+                    player.runCommandAsync(`scoreboard players set @s magicType${res.selection} ${resp.selection}`);
                 } else {
                     magicSetFormFunc();
                 }

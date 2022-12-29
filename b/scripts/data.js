@@ -31,7 +31,7 @@ export default
             summonEntityName:"fire_3",
             summonData:[[0,0,0,0,0]],
             resetRotateX:false,
-            cooldown:0
+            cooldown:40
         },
         {
             name:"グランドバースト",
